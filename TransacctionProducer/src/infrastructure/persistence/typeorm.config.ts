@@ -7,8 +7,6 @@ const typeOrmConfig: TypeOrmModuleOptions = {
   username: process.env.username, 
   password: process.env.password, 
   database: process.env.database, 
-  //entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-  //entities: [__dirname + '/../**/*.entity.js'],
   synchronize: false,
 };
 

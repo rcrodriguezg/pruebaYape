@@ -1,5 +1,5 @@
 
-import { Injectable, UseInterceptors } from "@nestjs/common";
+import { HttpException, HttpStatus, Injectable, UseInterceptors } from "@nestjs/common";
 import { TransactionDto } from "../../domain/models/dto/transaction.dto";
 
 import { OrmTransactionRepository } from "../../domain/repositories/orm-transaction.repository";
@@ -35,16 +35,26 @@ export class TransactionService {
 
   constructor(private readonly transactionRepository: OrmTransactionRepository, private readonly kafkaService: KafkaService) { }
 
-  
-
   logger = log4js.getLogger("TransactionService");
 
   async createTransaction(transaction: TransactionDto) {
     transaction.status = 1
+    try {
 
-    let response: TransactionDto = await this.transactionRepository.saveTransaction(transaction)
-    this.kafkaService.sendMessage(JSON.stringify(response), "transaction-topic")
-    return response
+      let response: TransactionDto = await this.transactionRepository.saveTransaction(transaction)
+      this.kafkaService.sendMessage(JSON.stringify(response), "transaction-topic")
+
+      return response
+
+    } catch (ex) {
+      this.logger.error(ex);
+
+      throw new HttpException('Error Inesperado', HttpStatus.BAD_REQUEST); 
+    }
+  }
+
+  async getTransaction(id : number)  {
+    return await this.transactionRepository.findBy({id : id });
   }
 
 }

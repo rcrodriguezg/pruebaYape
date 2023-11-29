@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AuthModule } from './infrastructure/web/auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TransactionService } from './application/services/transaction.service';
 import { OrmTransactionRepository } from './domain/repositories/orm-transaction.repository';
@@ -17,7 +16,7 @@ import { HttpModule } from '@nestjs/axios';
  * @class AppModule
  */
 @Module({
-  imports: [HttpModule,AuthModule,
+  imports: [HttpModule,
       //TypeOrmModule.forRoot(typeOrmConfig), 
       TypeOrmModule.forRoot({
         type: 'postgres',

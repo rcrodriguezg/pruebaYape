@@ -38,7 +38,7 @@ export class AppController {
   
   @MessagePattern('transaction-topic') 
   processTransactionK(@Payload() transaction) {
-    console.log("processTransactionK:", transaction)
+    
     return this.transactionService.processTransaction(transaction)
   }
 

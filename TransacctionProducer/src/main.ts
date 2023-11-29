@@ -1,4 +1,4 @@
-import { RequestMethod } from '@nestjs/common';
+import { RequestMethod, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
@@ -20,13 +20,14 @@ async function bootstrap() {
   });
   httpapp.enableCors();
 
+  httpapp.enableCors();
+  httpapp.useGlobalPipes(new ValidationPipe());
 
   const options = new DocumentBuilder()
-    .setTitle('API REST de Acceso a Datos de APPARK')
-    .setDescription('API REST de Acceso a Datos de APPARK')
+    .setTitle('MS Desafio Tecnico')
+    .setDescription('MS Desafio Tecnico YAPE')
     .setVersion('1.0')
     .build();
-
 
   const document = SwaggerModule.createDocument(httpapp, options);
 

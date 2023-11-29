@@ -51,11 +51,16 @@ export class TransactionService {
     if (response["status"] < 300) {
 
       let dataResponse = response["data"]
-      transaction.status = dataResponse.transactionStatus["name"]
-      transaction.createdAt = dataResponse.transactionStatus["createdat"]
+
       this.logger.log("processTransaction.dataResponse:", dataResponse)
-      let tr = this.updateTransaction(transaction).then( ()=> this.logger.log("processTransaction.tr:", tr) )
-      
+
+      transaction.status = dataResponse.transactionStatus["name"]
+      let createdAtDB = dataResponse["createdAt"].replace(/^(\d{1,2}\/)(\d{1,2}\/)(\d{4})$/, "$2$1$3");
+      transaction.createdAt = createdAtDB
+      this.logger.log("processTransaction.transaction.update:", transaction)
+      this.updateTransaction(transaction)
+
+
     } else {
       this.logger.log("Error:", response["status"])
     }
@@ -75,4 +80,6 @@ export class TransactionService {
         return error
       })
   }
+
+
 }

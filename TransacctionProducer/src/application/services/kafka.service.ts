@@ -37,22 +37,21 @@ export class KafkaService {
         brokers: ['localhost:9092'],
       },
       consumer: {
-        groupId: 'yape-kafka' // Should be the same thing we give in consumer
+        groupId: 'yape-kafka'
       }
     }
   })
   client: ClientKafka;
 
   async onModuleInit() {
-    // Need to subscribe to topic 
-    // so that we can get the response from kafka microservice
+
     this.client.subscribeToResponseOf('transaction-topic');
     await this.client.connect();
   }
 
   async sendMessage(message: string, topic: string) {
     this.logger.log("sendMessage:", message, topic)
-    return this.client.send(topic, message).forEach(e => console.log("E:", e)).catch(er => this.logger.log(er))
+    return this.client.send(topic, message).forEach(e => console.log("Sended!!!")).catch(er => this.logger.log(er))
   }
 
 }

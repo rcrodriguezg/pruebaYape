@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, Post, Body, UseInterceptors, Query, Param } from '@nestjs/common';
 import { AppService } from './app.service';
 import { TransactionDto } from './domain/models/dto/transaction.dto';
 
@@ -41,6 +41,10 @@ export class AppController {
     return this.transactionService.createTransaction(transaction)
   }
 
+  @Get("/:id")
+  getTransaction(@Param('id') id: number) {
+    return this.transactionService.getTransaction(id)
+  }
 
 
 

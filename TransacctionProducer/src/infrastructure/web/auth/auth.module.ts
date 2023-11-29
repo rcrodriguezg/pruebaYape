@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
-import { JwtStrategy } from './strategies/jwt.strategy';
 import { ConfigModule } from '@nestjs/config';
 
 
@@ -11,7 +10,7 @@ import { ConfigModule } from '@nestjs/config';
 const passportModule = PassportModule.register({ defaultStrategy: 'jwt' });
 @Module({
   controllers: [],
-  providers: [JwtStrategy],
+  providers: [],
   imports: [
     ConfigModule.forRoot(),
     passportModule,
@@ -28,6 +27,6 @@ const passportModule = PassportModule.register({ defaultStrategy: 'jwt' });
       },
     }),
   ],
-  exports: [JwtStrategy, PassportModule, JwtModule],
+  exports: [ PassportModule, JwtModule],
 })
 export class AuthModule {}
