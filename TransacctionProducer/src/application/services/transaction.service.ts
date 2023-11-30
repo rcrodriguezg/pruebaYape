@@ -42,19 +42,19 @@ export class TransactionService {
     try {
 
       let response: TransactionDto = await this.transactionRepository.saveTransaction(transaction)
-      this.kafkaService.sendMessage(JSON.stringify(response), "transaction-topic")
+      this.kafkaService.sendMessage(JSON.stringify(response), process.env.topic ? process.env.topic : 'transaction-topic')
 
       return response
 
     } catch (ex) {
       this.logger.error(ex);
 
-      throw new HttpException('Error Inesperado', HttpStatus.BAD_REQUEST); 
+      throw new HttpException('Error Inesperado', HttpStatus.BAD_REQUEST);
     }
   }
 
-  async getTransaction(id : number)  {
-    return await this.transactionRepository.findBy({id : id });
+  async getTransaction(id: number) {
+    return await this.transactionRepository.findBy({ id: id });
   }
 
 }

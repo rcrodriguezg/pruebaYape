@@ -4,6 +4,18 @@
 - Transaction Consumer
 - Transaction Producer
 
+# Stack Tecnologico:
+- Lenguajes de Programacion : TypeScript
+- Runtime : NodeJS
+- Framework : NestJS
+- ORM: TypeORM
+- Persistencia: PostgreSql
+- Comunicacion: Apache Kafka
+- Logging: Log4js
+- Otros: AOP Interceptor Logs
+- Arquitectura: Hexagonal segun template NestJS
+- Documentacion: SwaggerModule Nest
+
 ### Transaction Consumer
 Encargado de recibir el request de la transaccion nueva
 
@@ -17,15 +29,19 @@ http://localhost:3001/api
 
 ### Variables de Entorno
 
-- server=localhost
-- port=5432
-- username=postgres
-- password=admin1
-- database=postgres
-- API_ADDRESS=api
-- JWT_SECRET=1
-- antifraud_path=https://dw02w.wiremockapi.cloud/json
+- server=localhost : direccion ip o nombre del base de datos
+- port=5432 : puerto de base de datos
+- username=postgres : usuario de base de datos
+- password=admin1 : password de base de datos
+- database=postgres : nombre de instancia de base de datos
+- antifraud_path=https://dw02w.wiremockapi.cloud/json : endpoint de servicio antifraude
 
+#### Opcionales
+- API_ADDRESS: Para establecer Path de Endpoint
+- clientID: id del cliente kafka
+- kafkaServer : direccion ip o nombre de broker kafka
+- groupId : id del grupo 
+- topic : topico de mensajeria
 
 ### MockService Antifraude
 - Se crear Mock Service en wiremock.cloud para evaluacion de fraude

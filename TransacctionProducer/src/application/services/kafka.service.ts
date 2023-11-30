@@ -33,11 +33,11 @@ export class KafkaService {
     transport: Transport.KAFKA,
     options: {
       client: {
-        clientId: 'yape-kafka',
-        brokers: ['localhost:9092'],
+        clientId: process.env.clientID ? process.env.clientID :  'yape-kafka',
+        brokers: [process.env.kafkaServer ? process.env.kafkaServer :  'localhost:9092'],
       },
       consumer: {
-        groupId: 'yape-kafka'
+        groupId: process.env.groupId ? process.env.groupId :  'yape-kafka'
       }
     }
   })
@@ -45,7 +45,7 @@ export class KafkaService {
 
   async onModuleInit() {
 
-    this.client.subscribeToResponseOf('transaction-topic');
+    this.client.subscribeToResponseOf(process.env.topic ? process.env.topic : 'transaction-topic');
     await this.client.connect();
   }
 

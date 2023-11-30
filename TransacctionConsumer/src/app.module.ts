@@ -17,7 +17,7 @@ import { HttpModule } from '@nestjs/axios';
  */
 @Module({
   imports: [HttpModule,
-      //TypeOrmModule.forRoot(typeOrmConfig), 
+
       TypeOrmModule.forRoot({
         type: 'postgres',
         host: process.env.server,
@@ -26,8 +26,6 @@ import { HttpModule } from '@nestjs/axios';
         password: process.env.password, 
         database: process.env.database, 
         autoLoadEntities: true,
-        //entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-        //entities: [__dirname + '/../**/*.entity.js'],
         synchronize: false,
       }),
       TypeOrmModule.forFeature([Transaction]) ],
