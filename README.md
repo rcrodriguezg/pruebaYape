@@ -43,6 +43,12 @@ http://localhost:3001/api
 - groupId : id del grupo 
 - topic : topico de mensajeria
 
+### Logs - Opcionales
+- LOG_TYPE
+- LOG_FILENAME
+- LOG_numBackups
+- LOG_LEVEL
+
 ### MockService Antifraude
 - Se crear Mock Service en wiremock.cloud para evaluacion de fraude
 
