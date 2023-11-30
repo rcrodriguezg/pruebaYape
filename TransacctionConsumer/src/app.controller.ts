@@ -1,7 +1,6 @@
-import { Controller, Get, Post, Body, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, UseInterceptors } from '@nestjs/common';
 import { AppService } from './app.service';
 import { TransactionDto } from './domain/models/dto/transaction.dto';
-import { RetrieveTransactionDto } from './domain/models/dto/retrieveTransaction.dto';
 import { TransactionService } from './application/services/transaction.service';
 import { LoggingInterceptor } from './utils/logging.interceptor';
 import { MessagePattern, Payload } from '@nestjs/microservices';
@@ -35,10 +34,10 @@ export class AppController {
     return this.appService.getHealth();
   }
 
-  
-  @MessagePattern('transaction-topic') 
-  processTransactionK(@Payload() transaction) {
-    
+
+  @MessagePattern(process.env.topic ? process.env.topic : 'transaction-topic')
+  processTransactionK(@Payload() transaction : TransactionDto) {
+
     return this.transactionService.processTransaction(transaction)
   }
 
